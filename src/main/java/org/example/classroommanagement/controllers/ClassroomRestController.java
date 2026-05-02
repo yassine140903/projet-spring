@@ -117,9 +117,9 @@ public class ClassroomRestController {
      * 
      * Validates Requirement: 5.3
      */
-    @GetMapping("/utilisateurs/count")
+    @GetMapping("/utilisateurs/niveau/{niveau}")
     @Operation(summary = "Count users by academic level", description = "Returns the number of users assigned to classes with the specified niveau")
-    public ResponseEntity<Integer> nbUtilisateursParNiveau(@RequestParam Niveau niveau) {
+    public ResponseEntity<Integer> nbUtilisateursParNiveau(@PathVariable Niveau niveau) {
         Integer count = classroomService.nbUtilisateursParNiveau(niveau);
         return ResponseEntity.ok(count);
     }
@@ -132,7 +132,7 @@ public class ClassroomRestController {
      * 
      * Validates Requirement: 6.3
      */
-    @DeleteMapping("/cours/{idCours}/classe")
+    @PutMapping("/cours-classrooms/desaffecter/{idCours}")
     @Operation(summary = "Unassign a course from its class", description = "Sets the course's classe relationship to null")
     public ResponseEntity<Void> desaffecterCoursClassroomClasse(@PathVariable Integer idCours) {
         try {
